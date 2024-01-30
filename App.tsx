@@ -48,6 +48,13 @@ export default function App() {
     }
   };
 
+  const onClear = () => {
+    setBmi(undefined);
+    setHeight("");
+    setWeight("");
+    setError(false);
+  };
+
   return (
     <ScrollView
       style={styles.wrapper}
@@ -57,9 +64,6 @@ export default function App() {
     >
       <StatusBar style="auto" />
       <View style={styles.container}>
-        <Pressable>
-          <Image source={require("./assets/bin.svg")}></Image>
-        </Pressable>
         <Text style={styles.header}>BMI Calculator</Text>
         <Text style={styles.description}>
           Type your details below and get an accurate BMI number.
@@ -106,6 +110,12 @@ export default function App() {
             <Text style={styles.buttonText}>Calculate BMI</Text>
           </Pressable>
           {/* <Button title="Calculate BMI" onPress={calculateBMI} /> */}
+          {bmi && (
+            <Pressable style={styles.clearIcon} onPress={onClear}>
+              <Text>Clear</Text>
+              <Image source={require("./assets/bin.png")}></Image>
+            </Pressable>
+          )}
         </View>
       </View>
       {bmi && (
@@ -225,5 +235,15 @@ const styles = StyleSheet.create({
   },
   backgroundWhite: {
     backgroundColor: "#fff1f1",
+  },
+  clearIcon: {
+    width: 250,
+    height: 64,
+    gap: 4,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    opacity: 0.6,
+    marginTop: 20,
   },
 });
